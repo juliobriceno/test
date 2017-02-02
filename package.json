@@ -4,7 +4,8 @@
   "description": "algo",
   "main": "app.js",
   "scripts": {
-    "test": "na"
+    "test": "na",
+	"start": "node app.js"
   },
   "dependencies": {
     "express": "^4.13.4"
