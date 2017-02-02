@@ -7,8 +7,8 @@
     "test": "na"
   },
   "dependencies": {
-    "express": "4.13.4"
-  },  
+    "express": "^4.13.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/juliobriceno/test.git"
