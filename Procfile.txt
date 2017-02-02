@@ -1,0 +1,1 @@
+nombreApp: node app.js // donde node app.js es el comando que utilizamos siempre para encender nuestra aplicación.
