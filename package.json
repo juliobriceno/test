@@ -5,9 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "na",
-	"start": "node app.js"
+    "start": "node app.js"
   },
   "dependencies": {
+    "comma-separated-values": "^3.6.4",
     "express": "^4.13.4"
   },
   "repository": {

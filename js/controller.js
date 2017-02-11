@@ -2,9 +2,9 @@ angular.element(function() {
     angular.bootstrap(document, ['Solicitudes']);
 });
 
-angular.module('Solicitudes', ['darthwade.loading'])
+angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading'])
 
-        .controller('MyController3', ['$scope', '$http', function ($scope, $http) {
+        .controller('MyController3', ['$scope', '$http', 'FileUploader', '$loading', function ($scope, $http, FileUploader, $loading) {
             $scope.Usuario = 'admin@gmail.com';
             $scope.Contrasena = '123';
             $scope.Login = function () {
@@ -28,5 +28,17 @@ angular.module('Solicitudes', ['darthwade.loading'])
                     alert(response.statusText);
                 });
             }
+            $scope.uploader = new FileUploader();
+            $scope.uploader.url = "/upload";
+            $scope.uploader.onBeforeUploadItem = function (item) {
+                $loading.start('myloading');
+            };
+            $scope.uploader.onAfterAddingFile = function (item /*{File|FileLikeObject}*/, filter, options) {
+                $scope.uploader.uploadAll();
+            };
+            $scope.uploader.onSuccessItem = function (item, response) {
+                $loading.finish('myloading');
+                $scope.Productos = response.Productos;
+                swal("Mensaje de App de Inventario", "Se cargaron todos tus productos ya!!!!!.");
+            };
         }])
-

@@ -1,11 +1,13 @@
 var express = require("express");
-var app     = express();
+var CSV = require("comma-separated-values");
+var app = express();
 var path = require("path");
 var bodyParser = require('body-parser');
 var session = require('client-sessions');
 var expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
 var MyMongo = require('./js/mymongo.js');
+var fileUpload = require('express-fileupload');
 
 app.use(cookieParser());
 
@@ -16,6 +18,7 @@ app.use("/img", express.static(__dirname + '/img'));
 app.use("/", express.static(__dirname + '/'));
 
 app.use(bodyParser.json());
+app.use(fileUpload());
 
 // must use cookieParser before expressSession
 app.use(cookieParser());
@@ -59,6 +62,29 @@ app.post('/Login', function (req, res) {
     });
 });
 
-const port = process.env.PORT || 3000  
+app.post('/upload', function (req, res) {
+    var sampleFile;
+
+    if (!req.files) {
+        res.send('No files were uploaded.');
+        return;
+    }
+
+    sampleFile = req.files.file;
+
+    var Data = {};
+    var Productos = [];
+
+    CSV.forEach(sampleFile.data.toString('utf8'), { header: true }, function (record) {
+        Productos.push(record);
+    });
+
+    Data.Productos = Productos;
+
+    res.end(JSON.stringify(Data));
+
+});
+
+const port = process.env.PORT || 3000
 
 app.listen(port);
