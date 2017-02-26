@@ -12,53 +12,87 @@
     <link rel="stylesheet" type="text/css" href="https://ptreesys.mx/sharedfiles/src/sweetalert.css">
     <script src="https://ptreesys.mx/sharedfiles/src/sweetalert.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
-    <link rel="stylesheet" href="./css/main2.css">
+    <link rel="stylesheet" href="https://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css" />
+    <script src="https://mbenford.github.io/ngTagsInput/js/ng-tags-input.min.js"></script>
+
     <title>Login 2</title>
+
 </head>
 <body>
-    <div ng-controller="MyController3">
-        <div class="login__container">
-            <div class="login__top">
-                <img class="login__img" src="./img/logo.png" alt="">
-                <h2 class="login__title"></h2>
-            </div>
-            <form class="login__form">
-                <input type="file" nv-file-select uploader="uploader" value="Subir archivo" />
+    <div ng-controller="ctrlUploadFile">
 
-                </Br>
-                </Br>
-                </Br>
-
-                <div class="well well-lg">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                </tr>
-                            </thead>
-                            <tbody ng-repeat="Producto in Productos">
-                                <tr>
-                                    <td>{{Producto.Nombre}}</td>
-                                    <td>{{Producto.Precio}}</td>
-                                    <td>{{Producto.Cantidad}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Mercado Libre II</a>
                 </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li class="active"><a>Ofrece tus productos</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            {{ActiveUser}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-click="CloseSession();"><a href="#">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div dw-loading="myloading" dw-loading-options="{text: 'Procesando...'}">
+
+        <div class="file-input-wrapper">
+            <button class="btn-file-input">Subir Archivo</button>
+            <input type="file" accept=".csv, .txt" nv-file-select uploader="uploader" multiple />
+        </div>
+
+        <div>
+            <div class="form-group">
+                <label for="usr">Empresa:</label>
+                <input ng-model="regEnterprise" type="text" class="form-control" placeholder="Empresa">
+            </div>
+            <div class="form-group">
+                <label for="usr">Teléfono:</label>
+                <input ng-model="regPhone" type="text" class="form-control" placeholder="Telefono">
+            </div>
+            <div class="form-group">
+                <label for="usr">Ubicación / Estado:</label>
+                <select class="form-control"
+                        ng-model="selectedState"
+                        ng-options="State as State.name for State in States"></select>
+            </div>
+            <div class="form-group">
+                <input ng-click="updateUserData();" type="submit" class="button" value="Cambia tus datos">
+            </div>
+            <div class="form-group">
+                <label for="usr">Password:</label>
+                <input ng-model="regPassword" type="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="usr">Repetir password:</label>
+                <input ng-model="regPasswordRepeat" type="password" class="form-control" placeholder="Repetir password">
+            </div>
+            <div class="form-group">
+                <input ng-click="updatePassword();" type="submit" class="button" value="Cambia tu clave">
+            </div>
+        </div>
 
 
-            </form>
+
         </div>
     </div>
+
     <script src="js/controller.js"></script>
     <script src="js/angular-file-upload.min.js"></script>
+    <script src="js/spin.min.js"></script>
     <script src="js/angular-loading.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/2.2.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/upload_style.css">
 </body>
 </html>
