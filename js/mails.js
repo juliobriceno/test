@@ -5,10 +5,10 @@ module.exports = {
         var nodemailer = require('nodemailer');
         var smtpTransport = require('nodemailer-smtp-transport');
 
-        var mailAccountUser = 'juliob@ptree.com.mx'
-        var mailAccountPassword = 'Julio2016'
+        var mailAccountUser = 'innovacionesjoka@gmail.com'
+        var mailAccountPassword = 'joka2020**'
 
-        var fromEmailAddress = 'juliob@ptree.com.mx'
+        var fromEmailAddress = 'innovacionesjoka@gmail.com'
         var toEmailAddress = to
 
         var transport = nodemailer.createTransport(smtpTransport({
