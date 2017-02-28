@@ -35,9 +35,11 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     return 0;
                 }
                 if (response.Result == 'nx') {
-                    swal("Mensaje de App de Inventario", "Tu archivo NO contiene un nombre de columna 'Descripcion'!!!");
+                    $scope.Products = response.Products;
+                    swal("Mensaje de App de Inventario", "No se pudo importar. Detalles en la tabla!!!");
                     return 0;
                 }
+                $scope.Products = response.Products;
                 $scope.uploader.clearQueue();
                 swal("Mensaje de App de Inventario", "Se cargaron todos tus productos ya!!!!!.");
             };
@@ -362,7 +364,7 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     data: Data
                 }).then(function successCallback(response) {
                     $loading.finish('myloading');
-                    if (response.data.Login == true) {
+                    if (response.data.Result == 'Ok') {
                         swal("Mensaje de la aplicacion de recibos", "Tu cuenta fue creada. Te hemos enviado un correo con datos de acceso.");
                     }
                     else {

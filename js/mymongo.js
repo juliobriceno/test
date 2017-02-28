@@ -71,6 +71,28 @@ module.exports = {
             db.close();
         });
     },
+    Remove: function Remove(pcollection, criteria, callback) {
+        var mongodb = require('mongodb');
+        var MongoClient = mongodb.MongoClient;
+        var url = 'mongodb://juliobricenoro:juliobricenoro@ds139939.mlab.com:39939/juliobricenoro';
+        MongoClient.connect(url, function (err, db) {
+            if (err) {
+                console.log('Tremendo Error!!!!');
+            }
+            else {
+                var collection = db.collection(pcollection);
+                collection.remove(criteria, function (err, result) {
+                    if (err) {
+                        console.log('Tremenda ERROR compadre');
+                    }
+                    else {
+                        callback('Ok');
+                    }
+                });
+            }
+            db.close();
+        });
+    },
     Aggregate: function Aggregate(pcollection, aggregatequery, callback) {
         var mongodb = require('mongodb');
         var MongoClient = mongodb.MongoClient;

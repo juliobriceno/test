@@ -126,24 +126,50 @@ app.post('/upload', function (req, res) {
     }
 
     var Products = [];
+    var Fila = 0;
 
     CSV.forEach(sampleFile.data.toString('ascii'), { header: true }, function (record) {
         var Enterprise = { Enterprise: req.session.user.Enterprise, State: req.session.user.State, Email: req.session.user.Email, Phone: req.session.user.Phone };
-        Object.assign(Enterprise, record);
+        record.Msg = '1';
+        Fila = Fila + 1;
+        record.Fila = Fila;
         if (typeof record.Descripcion == 'undefined') {
+            record.Msg = 'No se encontró columna "Descripcion".';
             Data.Result = 'nx';
         }
+        if (typeof record.Precio == 'undefined') {
+            record.Msg = 'No se encontró columna "Precio".';
+            Data.Result = 'nx';
+        }
+        if (typeof record.Cantidad == 'undefined') {
+            record.Msg = 'No se encontró columna "Cantidad".';
+            Data.Result = 'nx';
+        }
+        for (var name in record) {
+            if ((name != 'Descripcion') && (name != 'Precio') && (name != 'Cantidad') && (name != 'Estado') && (name != 'Marca') && (name != 'Modelo') && (name != 'Serial') && (name != 'Msg') && (name != 'Fila')) {
+                record.Msg = 'Una columna tiene un nombre desconocido';
+                Data.Result = 'nx';
+            }
+        }
+        Object.assign(Enterprise, record);
         Products.push(Enterprise);
     });
+
+    Data.Products = Products;
+
+    Data.Products = Data.Products.filter(function (el) { return el.Msg != '1' });
 
     if (Data.Result == 'nx') {
         res.end(JSON.stringify(Data))
         return 0;
     }
 
-    MyMongo.Insert('Inventary', Products, function (result) {
-        Data.Result = 'Ok';
-        if (result == 'Ok') { res.end(JSON.stringify(Data)) };
+    MyMongo.Remove('Inventary', { Email: req.session.user.Email }, function (result) {
+        MyMongo.Insert('Inventary', Products, function (result) {
+            Data.Result = 'Ok';
+            if (result == 'Ok') { res.end(JSON.stringify(Data)) };
+        }
+        );
     }
     );
 
@@ -161,7 +187,9 @@ app.post('/Registration', function (req, res) {
     MyMongo.Insert('Users', { 'Enterprise': req.body.Enterprise, 'State': req.body.State, 'Phone': req.body.Phone, 'Email': req.body.Email, 'Password': text }, function (result) {
         if (result == 'Ok') {
             MyMail.SendEmail("<b>Aquí está la clave:!!! " + text + "</b><p>", req.body.Email, "Acceso al sistema");
-            res.end(JSON.stringify({ result: 'Ok' }))
+            var Data = {};
+            Data.Result = 'Ok';
+            res.end(JSON.stringify(Data))
         };
     }
     );
@@ -180,7 +208,9 @@ app.post('/RecoverPassword', function (req, res) {
     MyMongo.Update('Users', { 'Email': req.body.Email }, { 'Password': text }, function (result) {
         if (result == 'Ok') {
             MyMail.SendEmail("<b>Aquí está la clave:!!! " + text + "</b><p>", req.body.Email, "Acceso al sistema");
-            res.end(JSON.stringify({ result: 'Ok' }))
+            var Data = {};
+            Data.Result = 'Ok';
+            res.end(JSON.stringify(Data))
         };
     }
     );
