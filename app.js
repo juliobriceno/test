@@ -10,6 +10,18 @@ var MyMongo = require('./js/mymongo.js');
 var fileUpload = require('express-fileupload');
 var MyMail = require('./js/mails.js');
 
+app.use(function (req, res, next) {
+    var str = req.url;
+    var patt = new RegExp(".git");
+    var patt2 = new RegExp("node_modules");
+    if ((req.url == '/app.js') || (patt.test(str) == true) || (patt2.test(str) == true) || (req.url == '/js/mymongo.js') || (req.url == '/js/mails.js')) {
+        res.status(404).send("Not found");
+    }
+    else {
+        next();
+    }
+});
+
 app.use("/css", express.static(__dirname + '/css'));
 app.use("/js", express.static(__dirname + '/js'));
 app.use("/lib", express.static(__dirname + '/lib'));
