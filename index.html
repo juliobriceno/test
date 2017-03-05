@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Buscar productos::..</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
@@ -16,35 +17,56 @@
     <script src="https://mbenford.github.io/ngTagsInput/js/ng-tags-input.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  
+<style type="text/css">
     
-    <title>Buscar productos</title>
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+    color: #555;
+    background-color: transparent;
 
+</style>
 </head>
-<body>
+<body ng-cloak>
 
     <div ng-controller="ctrlProducts">
+        <nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Menu Navegacion</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" style="padding-top:0px; ">
+      <img src="img/logoInv2.png" width="50" height="50"></a>
+    </div>
 
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Mercado Libre II</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Inicio</a></li>
-                    <li><a href="/getPanel">Ofrece tus productos</a></li>
-                </ul>
-            </div>
-        </nav>
-
+    <!-- Collect the nav links, forms, and other content for toggling -->
+   
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     <ul class="nav navbar-nav navbar-right">
+    <li class="nav-item active " ><a class="nav-link" href="#"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>   
+    <li class="nav-item active "><a class="nav-link" href="/getPanel"> <span class="glyphicon glyphicon-tags"></span> Vender</a></li>   
+    </ul>
+    <div class="input-group" style="margin: auto; margin-top: 1%">
+                          <input type="text" class="form-control" placeholder="Escriba el producto que busca" ng-model="txtFind" uib-typeahead="txtproduct as txtproduct._id for txtproduct in txtProducts  | orderBy:'-count' | filter:$viewValue | limitTo:8"/>
+                                    <span class="input-group-btn">
+                                        <button ng-click="GetProducts();" class="btn btn-success" type="button">
+                                            <span class=" glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                        </div> 
+    
+    
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>       
         <div dw-loading="myloading" dw-loading-options="{text: 'Procesando...'}">
 
-        <div class='container-fluid typeahead-demo'>
-            <input type="text" placeholder="Escriba el producto que busca" ng-model="txtFind" uib-typeahead="txtproduct as txtproduct._id for txtproduct in txtProducts  | orderBy:'-count' | filter:$viewValue | limitTo:8" class="form-control">
-        </div>
-
-        <button ng-click="GetProducts();" type="button">Buscar</button> </br>
-
-         <div ng-show="showFinder">
+            <div ng-show="showFinder">
 
              <label>Ubicacion</label>
              <tags-input display-property="State" min-length="1" ng-model="States" add-on-paste="true" placeholder="Ubicacion (Estado) del producto" on-tag-added="tagAdded($tag)" on-tag-removed="tagAdded($tag)">
@@ -113,14 +135,15 @@
             </div>
 
     </div>
-
+    
     <script src="js/controller.js"></script>
     <script src="js/angular-file-upload.min.js"></script>
     <script src="js/spin.min.js"></script>
     <script src="js/angular-loading.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
     <link rel="stylesheet" type="text/css" href="css/autocomplete.css" />
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/upload_style.css">
+    
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   
 </body>
 </html>

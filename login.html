@@ -3,88 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-      <title>Day 001 Login Form</title>
-
+    <title>Registrate::..</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
-
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
     <link rel="stylesheet" type="text/css" href="https://ptreesys.mx/sharedfiles/src/sweetalert.css">
     <script src="https://ptreesys.mx/sharedfiles/src/sweetalert.min.js"></script>
-
     <link rel="stylesheet" href="https://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css" />
     <script src="https://mbenford.github.io/ngTagsInput/js/ng-tags-input.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-
-    <title>Buscar productos</title>
+    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/stylelogin.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   
-  <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
+<style type="text/css">
 
-      <link rel="stylesheet" href="css/stylelogin.css">
-  
+</style>
+
+
 </head>
 
-<body>
+<body ng-cloak>
+
+<header>
+    
+<div class="row">
+    
+<nav class="navbar navbar-default">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Menu Navegacion</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" style="padding-top:0px; ">
+      <img src="img/logoInv2.png" width="50" height="50"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Inicio</a></li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</div>
+
+
+
+</header>
 
     <div ng-controller="ctrlLogin">
+             
+         
         <div dw-loading="myloading" dw-loading-options="{text: 'Procesando...'}">
 
             <div class="login-wrap">
-                <div class="login-html">
-                    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Ingresar</label>
-                    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Registrarse</label>
+
+
+                <div class="login-html ">
+                    
                     <div class="login-form">
-                        <div class="sign-in-htm">
-                            <div class="group">
-                                <label for="user" class="label">Correo Electrónico</label>
-                                <input ng-model="logEmail" type="text" class="input">
+                        <form class="sign-in-htm">
+
+                        <div ng-show="showlogin">
+                                                  
+                            <div class="input-group group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <label for="user" class="sr-only control-label">Correo Electrónico</label>
+                                <input ng-model="logEmail" type="text" class="form-control" placeholder="Ingrese su Correo Electrónico">
                             </div>
-                            <div class="group">
-                                <label for="pass" class="label">Contraseña</label>
-                                <input ng-model="logPassword" type="password" class="input" data-type="password">
+                            <div class="input-group group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <label for="pass" class="sr-only control-label">Contraseña</label>
+                                <input ng-model="logPassword" type="password" class="form-control" data-type="password" placeholder="Ingrese su contraseña">
                             </div>
                             <div class="group">
                                 <input ng-click="Login();" type="submit" class="button" value="Ingresar">
                             </div>
                             <div class="hr"></div>
                             <div class="foot-lnk">
-                                <a href="#" ng-click="ForgotPassword();">Olvidaste la contraseña?</a>
+                                <a href="#" ng-click="ForgotPassword();">Olvidaste la contraseña?</a> <br>
+                                <a href="#" ng-click="showlogin = false">Registrate</a> <br>
                             </div>
+
                         </div>
-                        <div class="sign-up-htm">
-                            <div class="group">
-                                <label for="pass" class="label">Empresa</label>
-                                <input ng-model="regEnterprise" type="text" class="input">
+        
+
+                        </form>
+
+                    <div ng-show="!showlogin">
+
+                        <div>
+                            <div class="input-group group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <label for="pass" class="sr-only control-label">Empresa</label>
+                                <input ng-model="regEnterprise" type="text" class="form-control"  placeholder="Nombre de empresa">
                             </div>
-                            <div class="group">
-                                <label for="pass" class="label">Correo Electrónico</label>
-                                <input ng-model="regEmail" type="text" class="input">
+                            <div class="input-group group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <label for="pass" class="sr-only control-label">Correo Electrónico</label>
+                                <input ng-model="regEmail" type="text"class="form-control" placeholder="Correo electronico">
                             </div>
-                            <div class="group">
-                                <label for="pass" class="label">Teléfono -Opcional-</label>
-                                <input ng-model="regPhone" type="text" class="input">
+                            <div class="input-group group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                                <label for="pass" class="sr-only control-label">Teléfono -Opcional-</label>
+                                <input ng-model="regPhone" type="text" class="form-control"  placeholder="Numero Telefonico">
                             </div>
-                            <div class="group">
-                                <label for="pass" class="label">Ubicación Estado</label>
+                            <div class="input-group group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                                <label for="pass" class="sr-only control-label">Ubicación Estado</label>
                                 <select class="form-control"
                                         ng-model="selectedState"
                                         ng-options="State as State.name for State in States">
+                                <option value="" disabled="" selected="">Seleccione Estado</option>
                                 </select>
+
                             </div>
                             <div class="group">
                                 <input ng-click="Registration();" type="submit" class="button" value="Registrarse">
+                                <a href="#" ng-click="showlogin = true">PaTras</a> <br>
                             </div>
                         </div>
+                    </div>
+
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+  
     
     <script src="js/controller.js"></script>
     <script src="js/angular-file-upload.min.js"></script>
@@ -92,8 +151,9 @@
     <script src="js/angular-loading.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
     <link rel="stylesheet" type="text/css" href="css/autocomplete.css" />
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/upload_style.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   
+    
 
 </body>
 </html>

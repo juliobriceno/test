@@ -5,7 +5,6 @@ angular.element(function() {
 angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTagsInput', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
 
         .controller('ctrlUploadFile', ['$scope', '$http', 'FileUploader', '$loading', function ($scope, $http, FileUploader, $loading) {
-            $scope.regPassword = '';
             $scope.regPasswordRepeat = '';
             $scope.States = [{ name: 'Amazonas' }, { name: 'Anzo\341tegui' }, { name: 'Apure' }, { name: 'Aragua' }, { name: 'Barinas' }, { name: 'Bol\355var' }, { name: 'Carabobo' }, { name: 'Cojedes' }, { name: 'Delta Amacuro' }, { name: 'Distrito Capital' }, { name: 'Falc\363n' }, { name: 'Gu\341rico' }, { name: 'Lara' }, { name: 'M\351rida' }, { name: 'Miranda' }, { name: 'Monagas' }, { name: 'Nueva Esparta' }, { name: 'Portuguesa' }, { name: 'Sucre' }, { name: 'T\341chira' }, { name: 'Trujillo' }, { name: 'Vargas' }, { name: 'Yaracuy' }, { name: 'Zulia' }];
             $scope.uploader = new FileUploader();
@@ -307,6 +306,7 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
         }])
 
         .controller('ctrlLogin', ['$scope', '$http', '$loading', function ($scope, $http, $loading) {
+            $scope.showlogin = true;
             $scope.logEmail = 'julio.briceno@gmail.com';
             $scope.logPassword = '0dcMr';
             $scope.regEmail = '';
