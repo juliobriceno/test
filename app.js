@@ -226,7 +226,7 @@ app.post('/Registration', function (req, res) {
 
     MyMongo.Insert('Users', { 'Enterprise': req.body.Enterprise, 'State': req.body.State, 'Phone': req.body.Phone, 'Email': req.body.Email, 'Password': text }, function (result) {
         if (result == 'Ok') {
-            MyMail.SendEmail("<b>Aquí está la clave:!!! " + text + "</b><p>", req.body.Email, "Acceso al sistema");
+            MyMail.SendEmail("<p>&nbsp;</p><p>Hola!</p><p>Solicitaste una clave de acceso a Encu&eacute;ntralo. Hemos generado una al azar, la cual es: <strong>" + text + "</strong>.</p><p>Las mejores ventas!</p><p>&nbsp;</p>", req.body.Email, "Acceso a Encuentralo.");
             var Data = {};
             Data.Result = 'Ok';
             res.end(JSON.stringify(Data))
@@ -247,7 +247,7 @@ app.post('/RecoverPassword', function (req, res) {
 
     MyMongo.Update('Users', { 'Email': req.body.Email }, { 'Password': text }, function (result) {
         if (result == 'Ok') {
-            MyMail.SendEmail("<b>Aquí está la clave:!!! " + text + "</b><p>", req.body.Email, "Acceso al sistema");
+            MyMail.SendEmail("<p>&nbsp;</p><p>Hola!</p><p>Solicitaste una nueva clave de acceso a Encu&eacute;ntralo. Hemos generado una al azar, la cual es: <strong>" + text + "</strong>.</p><p>Las mejores ventas!</p><p>&nbsp;</p>", req.body.Email, "Nueva clave de acceso a Encuentralo.");
             var Data = {};
             Data.Result = 'Ok';
             res.end(JSON.stringify(Data))
