@@ -98,6 +98,10 @@ app.post('/Login', function (req, res) {
     });
 });
 
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 app.post('/upload', function (req, res) {
 
     var Data = {};
@@ -153,9 +157,33 @@ app.post('/upload', function (req, res) {
             record.Msg = 'No se encontró columna "Precio".';
             Data.Result = 'nx';
         }
+        else {
+            if (!isNumber(record.Precio)) {
+                record.Msg = 'La columna "Precio no es un número".';
+                Data.Result = 'nx';
+            }
+        }
         if (typeof record.Cantidad == 'undefined') {
             record.Msg = 'No se encontró columna "Cantidad".';
             Data.Result = 'nx';
+        }
+        else {
+            if (Math.floor(record.Cantidad) != record.Cantidad || !isNumber(record.Cantidad)) {
+                record.Msg = 'La columna "Cantidad" no es un número entero.';
+                Data.Result = 'nx';
+            }
+        }
+        if (typeof record.Estado == 'undefined') {
+            record.Estado = '';
+        }
+        if (typeof record.Marca == 'undefined') {
+            record.Marca = '';
+        }
+        if (typeof record.Modelo == 'undefined') {
+            record.Modelo = '';
+        }
+        if (typeof record.Serial == 'undefined') {
+            record.Serial = '';
         }
         for (var name in record) {
             if ((name != 'Descripcion') && (name != 'Precio') && (name != 'Cantidad') && (name != 'Estado') && (name != 'Marca') && (name != 'Modelo') && (name != 'Serial') && (name != 'Msg') && (name != 'Fila')) {
