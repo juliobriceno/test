@@ -155,6 +155,9 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                 $scope.chkNew = true;
                 $scope.chkUsed = true;
             }
+            $scope.onSelect = function ($item, $model, $label) {
+                $scope.GetProducts();
+            }
             $scope.loadOrders = function (query) {
                 var Orders = [];
                 Orders = [{ "text": "Menor Precio", name: 'Precio', dir: 'asc' }, { "text": "Mayor Cantidad", name: 'Cantidad', dir: 'desc' }, { "text": "Menor Cantidad", name: 'Cantidad', dir: 'asc' }, { "text": "Mayor Precio", name: 'Precio', dir: 'desc' }];

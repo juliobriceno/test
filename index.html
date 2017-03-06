@@ -65,7 +65,7 @@
     <li class="nav-item active "><a class="nav-link" href="/getPanel" ><span class="glyphicon glyphicon-cloud-upload"></span> Publica tus productos</a></li>   
     </ul>
     <div class="input-group" style="margin: auto; margin-top: 1%">
-                          <input type="text" class="form-control" placeholder="¿Qué buscas?" ng-model="txtFind" uib-typeahead="txtproduct as txtproduct._id for txtproduct in txtProducts  | orderBy:'-count' | filter:$viewValue | limitTo:8"/>
+                          <input typeahead-on-select="onSelect($item, $model, $label)" type="text" class="form-control" placeholder="¿Qué buscas?" ng-model="txtFind" uib-typeahead="txtproduct as txtproduct._id for txtproduct in txtProducts  | orderBy:'-count' | filter:$viewValue | limitTo:8"/>
                                     <span class="input-group-btn">
                                         <button ng-click="GetProducts();" class="btn btn-info" id="boton-search" type="button">
                                             <span class=" glyphicon glyphicon-search"></span>
@@ -87,17 +87,17 @@
              <label style="font-size: 14px;color:#34495e;">Ubicacion</label>
              
              <tags-input display-property="State"  class="bootstrap" min-length="1" ng-model="States" add-on-paste="true" placeholder=" " on-tag-added="tagAdded($tag)" on-tag-removed="tagAdded($tag)">
-                 <auto-complete display-property="State" min-length="1" source="loadStates($query)" load-on-down-arrow="true"></auto-complete>
+                 <auto-complete display-property="State" min-length="0" source="loadStates($query)" load-on-empty="true" load-on-focus="true" load-on-down-arrow="true"></auto-complete>
              </tags-input>
 
              <label>Marca</label>
              <tags-input display-property="Marca" min-length="1" ng-model="Makes" add-on-paste="true" placeholder=" " on-tag-added="tagAdded($tag)" on-tag-removed="tagAdded($tag)">
-                 <auto-complete display-property="Marca" min-length="1" source="loadMakes($query)" load-on-down-arrow="true"></auto-complete>
+                 <auto-complete display-property="Marca" min-length="0" source="loadMakes($query)" load-on-empty="true" load-on-focus="true" load-on-down-arrow="true"></auto-complete>
              </tags-input>
 
              <label>Modelo</label>
              <tags-input display-property="Modelo" min-length="1" ng-model="Models" add-on-paste="true" placeholder=" " on-tag-added="tagAdded($tag)" on-tag-removed="tagAdded($tag)">
-                 <auto-complete display-property="Modelo" min-length="1" source="loadModels($query)" load-on-down-arrow="true"></auto-complete>
+                 <auto-complete display-property="Modelo" min-length="0" source="loadModels($query)" load-on-empty="true" load-on-focus="true" load-on-down-arrow="true"></auto-complete>
              </tags-input>
              <label>Estado</label><br>
              <input ng-model="chkNew" ng-click="FilterProduct();" type="checkbox"> Nuevo<br>
