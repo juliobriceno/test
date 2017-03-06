@@ -151,13 +151,13 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                 $scope.Makes = [];
                 $scope.Models = [];
                 $scope.Products = [];
-                $scope.Orders = [{ "text": "Menor a Mayor Precio", name: 'Precio', dir: 'asc' }, { "text": "Mayor a Menor Cantidad", name: 'Cantidad', dir: 'desc' }];
+                $scope.Orders = [{ "text": "Menor Precio", name: 'Precio', dir: 'asc' }, { "text": "Mayor Cantidad", name: 'Cantidad', dir: 'desc' }];
                 $scope.chkNew = true;
                 $scope.chkUsed = true;
             }
             $scope.loadOrders = function (query) {
                 var Orders = [];
-                Orders = [{ "text": "Menor a Mayor Precio", name: 'Precio', dir: 'asc' }, { "text": "Mayor a Menor Cantidad", name: 'Cantidad', dir: 'desc' }, { "text": "Menor a Mayor Cantidad", name: 'Cantidad', dir: 'asc' }, { "text": "Mayor a Menor Precio", name: 'Precio', dir: 'desc' }];
+                Orders = [{ "text": "Menor Precio", name: 'Precio', dir: 'asc' }, { "text": "Mayor Cantidad", name: 'Cantidad', dir: 'desc' }, { "text": "Menor Cantidad", name: 'Cantidad', dir: 'asc' }, { "text": "Mayor Precio", name: 'Precio', dir: 'desc' }];
                 Orders = Orders.filter(function (el) {
                     return (el.text.toUpperCase().indexOf(query.toUpperCase()) > -1)
                 });
