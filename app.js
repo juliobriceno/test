@@ -33,12 +33,12 @@ app.use(fileUpload());
 
 // must use cookieParser before expressSession
 app.use(cookieParser());
-app.use(expressSession({ secret: 'somesecrettokenhere', resave: true, saveUninitialized: true }));
+app.use(expressSession({ secret: '#19DieciNueveNoviembre', resave: true, saveUninitialized: true }));
 
 app.use("/", express.static(__dirname + '/'));
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/getproducts.html'));
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.get('/getPanel', function (req, res) {
