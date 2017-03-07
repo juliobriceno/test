@@ -22,25 +22,25 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     return 0;
                 }
                 if (response.Result == 'nd') {
-                    swal("Mensaje", "Tu archivo no tiene data.");
+                    swal("Encu\u00e9ntralo dice", "Tu archivo no tiene data.");
                     return 0;
                 }
                 if (response.Result == 'nt') {
-                    swal("Mensaje", "Tu archivo no es ni txt ni csv.");
+                    swal("Encu\u00e9ntralo dice", "Tu archivo no es ni txt ni csv.");
                     return 0;
                 }
                 if (response.Result == 'ns') {
-                    swal("Mensaje", "Tu archivo es muy grande.");
+                    swal("Encu\u00e9ntralo dice", "Tu archivo es muy grande.");
                     return 0;
                 }
                 if (response.Result == 'nx') {
                     $scope.Products = response.Products;
-                    swal("Mensaje", "No se pudo importar tu archivo. Detalles en la tabla al cerrar \u00e9sta ventana.");
+                    swal("Encu\u00e9ntralo dice", "No se pudo importar tu archivo. Detalles en la tabla al cerrar \u00e9sta ventana.");
                     return 0;
                 }
                 $scope.Products = response.Products;
                 $scope.uploader.clearQueue();
-                swal("Mensaje", "Tus productos fueron cargados.");
+                swal("Encu\u00e9ntralo dice", "Tus productos fueron cargados.");
             };
             $scope.CloseSession = function () {
                 $loading.start('myloading');
@@ -83,7 +83,7 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
             }
             $scope.updateUserData = function () {
                 if ($scope.regEnterprise.trim() == '') {
-                    swal("Mensaje", "Coloca un nombre de empresa.");
+                    swal("Encu\u00e9ntralo dice", "Coloca un nombre de empresa.");
                     return 0;
                 }
                 $loading.start('myloading');
@@ -103,7 +103,7 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     }
                     else {
                         if (response.data.Result == 'Ok') {
-                            swal("Mensaje", "Tus datos fueron actualizados.");
+                            swal("Encu\u00e9ntralo dice", "Tus datos fueron actualizados.");
                         };
                     }
                     $loading.finish('myloading');
@@ -113,7 +113,7 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
             }
             $scope.updatePassword = function () {
                 if ($scope.regPassword.trim() != $scope.regPasswordRepeat.trim()) {
-                    swal("Mensaje", "Contraseñas no coinciden.");
+                    swal("Encu\u00e9ntralo dice", "Contrase\u00f1as no coinciden.");
                     return 0;
                 }
                 $loading.start('myloading');
@@ -131,7 +131,7 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     }
                     else {
                         if (response.data.Result == 'Ok') {
-                            swal("Mensaje", "Tu contraseña fue actualizada.");
+                            swal("Encu\u00e9ntralo dice", "Tu contrase\u00f1a fue actualizada.");
                         };
                     }
                     $loading.finish('myloading');
@@ -180,6 +180,8 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                 Makes = Makes.filter(function (el) {
                     return (el.Marca.toUpperCase().indexOf(query.toUpperCase()) > -1)
                 });
+                console.log('Vale');
+                console.log(Makes);
                 return Makes;
             };
             $scope.loadModels = function (query) {
@@ -212,11 +214,9 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     $scope.showFinder = true;
                     $scope.Products = response.data.Products;
                     $scope.ProductsAll = $scope.Products;
-                    $scope.ProductMakes = _.uniqBy($scope.Products, 'Marca');
-                    $scope.ProductStates = _.uniqBy($scope.Products, 'State');
-                    $scope.ProductModels = _.uniqBy($scope.Products, 'Modelo');
-                    console.log($scope.ProductMakes);
-                    console.log($scope.ProductModels);
+                    $scope.ProductMakes = _.orderBy(_.uniqBy($scope.Products, 'Marca'), ['Marca'], ['asc']);
+                    $scope.ProductStates = _.orderBy(_.uniqBy($scope.Products, 'State'), ['State'], ['asc']);
+                    $scope.ProductModels = _.orderBy(_.uniqBy($scope.Products, 'Modelo'), ['Modelo'], ['asc']);
                     $scope.FilterProduct();
                     $loading.finish('myloading');
                 }, function errorCallback(response) {
@@ -310,14 +310,14 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
 
         .controller('ctrlLogin', ['$scope', '$http', '$loading', function ($scope, $http, $loading) {
             $scope.showlogin = true;
-            $scope.logEmail = 'julio.briceno@gmail.com';
-            $scope.logPassword = '0dcMr';
+            $scope.logEmail = '';
+            $scope.logPassword = '';
             $scope.regEmail = '';
             $scope.regPhone = '';
             $scope.regEnterprise = '';
             $scope.ForgotPassword = function () {
                 if ($scope.ValidateEmail($scope.logEmail) == false) {
-                    swal("Mensaje", "Coloca un correo v\u00e1lido.");
+                    swal("Encu\u00e9ntralo dice", "Coloca un correo v\u00e1lido.");
                     return 0;
                 }
                 var Data = {};
@@ -331,10 +331,10 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                 }).then(function successCallback(response) {
                     $loading.finish('myloading');
                     if (response.data.Result == 'Ok') {
-                        swal("Mensaje", "Una nueva clave fue generada y enviada a tu correo electr\u00f3nico.");
+                        swal("Encu\u00e9ntralo dice", "Una nueva clave fue generada y enviada a tu correo electr\u00f3nico.");
                     }
                     else {
-                        swal("Mensaje", "Ocurri\u00f3 un error inesperado.");
+                        swal("Encu\u00e9ntralo dice", "Ocurri\u00f3 un error inesperado.");
                     }
                 }, function errorCallback(response) {
                     alert(response.statusText);
@@ -343,15 +343,15 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
             $scope.States = [{ name: 'Bocas del Toro' }, { name: 'Cocl\u00e9' }, { name: 'Col\u00f3n' }, { name: 'Chiriqu\u00ed' }, { name: 'Dari\u00e9n' }, { name: 'Herrera' }, { name: 'Los Santos' }, { name: 'Panam\u00e1' }, { name: 'Panam\u00e1 Oeste' }, { name: 'Veraguas' }];
             $scope.Registration = function () {
                 if ($scope.ValidateEmail($scope.regEmail) == false) {
-                    swal("Mensaje", "Coloca un correo v\u00e1lido.");
+                    swal("Encu\u00e9ntralo dice", "Coloca un correo v\u00e1lido.");
                     return 0;
                 }
                 if (typeof $scope.selectedState == 'undefined') {
-                    swal("Mensaje", "Coloca un Estado.");
+                    swal("Encu\u00e9ntralo dice", "Coloca un Estado.");
                     return 0;
                 }
                 if ($scope.regEnterprise.trim() == '') {
-                    swal("Mensaje", "Coloca un nombre de empresa.");
+                    swal("Encu\u00e9ntralo dice", "Coloca un nombre de empresa.");
                     return 0;
                 }
                 var Data = {};
@@ -368,10 +368,10 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                 }).then(function successCallback(response) {
                     $loading.finish('myloading');
                     if (response.data.Result == 'Ok') {
-                        swal("Mensaje", "Tu cuenta fue creada. Te hemos enviado un correo con datos de acceso.");
+                        swal("Encu\u00e9ntralo dice", "Tu cuenta fue creada. Te hemos enviado un correo con datos de acceso.");
                     }
                     else if (response.data.Result == 'Re') {
-                        swal("Mensaje", "Lo siento, ya existe otro registro con esa cuenta de correo. Intenta con otro.");
+                        swal("Encu\u00e9ntralo dice", "Lo siento, ya existe otro registro con esa cuenta de correo. Intenta con otro.");
                     }
                     else {
                         swal("Mensaje de la aplicacion de recibos", "Ocurri\u00f3 un error inesperado.");
@@ -382,11 +382,11 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
             }
             $scope.Login = function () {
                 if ($scope.ValidateEmail($scope.logEmail) == false) {
-                    swal("Mensaje", "Coloca un correo v\u00e1lido.");
+                    swal("Encu\u00e9ntralo dice", "Coloca un correo v\u00e1lido.");
                     return 0;
                 }
                 if ($scope.logPassword.trim() == '') {
-                    swal("Mensaje", "Coloca un password.");
+                    swal("Encu\u00e9ntralo dice", "Coloca un password.");
                     return 0;
                 }
                 $loading.start('myloading');
@@ -404,7 +404,7 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                         window.location.href = '/uploadfile.html';
                     }
                     else {
-                        swal("Mensaje", "Clave inv\u00e1lida.");
+                        swal("Encu\u00e9ntralo dice", "Clave inv\u00e1lida.");
                     }
                 }, function errorCallback(response) {
                     alert(response.statusText);

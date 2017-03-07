@@ -121,16 +121,16 @@ app.post('/upload', function (req, res) {
 
     sampleFile = req.files.file;
 
+    if (typeof sampleFile == 'undefined') {
+        Data.Result = 'nd';
+        res.end(JSON.stringify(Data))
+        return 0;
+    }
+
     if (sampleFile.mimetype.trim() != 'application/vnd.ms-excel' && sampleFile.mimetype.trim() != 'text/plain')
     {
         Data.Result = 'nt';
         res.end(JSON.stringify(Data));
-        return 0;
-    }
-
-    if (typeof sampleFile == 'undefined') {
-        Data.Result = 'nd';
-        res.end(JSON.stringify(Data))
         return 0;
     }
 
@@ -234,7 +234,7 @@ app.post('/Registration', function (req, res) {
             }
             MyMongo.Insert('Users', { 'Enterprise': req.body.Enterprise, 'State': req.body.State, 'Phone': req.body.Phone, 'Email': req.body.Email, 'Password': text }, function (result) {
                 if (result == 'Ok') {
-                    MyMail.SendEmail("<p>&nbsp;</p><p>Hola!</p><p>Solicitaste una clave de acceso a Encu&eacute;ntralo. Hemos generado una al azar, la cual es: <strong>" + text + "</strong>.</p><p>Las mejores ventas!</p><p>&nbsp;</p>", req.body.Email, "Acceso a Encuentralo.");
+                    MyMail.SendEmail("<p>&nbsp;</p><p>Hola!</p><p>Solicitaste una clave de acceso a Encu&eacute;ntralo. Hemos generado una al azar, la cual es: <strong>" + text + "</strong>  </p><p>Las mejores ventas!</p><p>&nbsp;</p>", req.body.Email, "Acceso a Encuentralo.");
                     Data.Result = 'Ok';
                     res.end(JSON.stringify(Data))
                     return 0;
@@ -257,7 +257,7 @@ app.post('/RecoverPassword', function (req, res) {
 
     MyMongo.Update('Users', { 'Email': req.body.Email }, { 'Password': text }, function (result) {
         if (result == 'Ok') {
-            MyMail.SendEmail("<p>&nbsp;</p><p>Hola!</p><p>Solicitaste una nueva clave de acceso a Encu&eacute;ntralo. Hemos generado una al azar, la cual es: <strong>" + text + "</strong>.</p><p>Las mejores ventas!</p><p>&nbsp;</p>", req.body.Email, "Nueva clave de acceso a Encuentralo.");
+            MyMail.SendEmail("<p>&nbsp;</p><p>Hola!</p><p>Solicitaste una nueva clave de acceso a Encu&eacute;ntralo. Hemos generado una al azar, la cual es: <strong>" + text + "</strong>  </p><p>Las mejores ventas!</p><p>&nbsp;</p>", req.body.Email, "Nueva clave de acceso a Encuentralo.");
             var Data = {};
             Data.Result = 'Ok';
             res.end(JSON.stringify(Data))
