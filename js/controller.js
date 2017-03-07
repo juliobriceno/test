@@ -214,9 +214,9 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     $scope.showFinder = true;
                     $scope.Products = response.data.Products;
                     $scope.ProductsAll = $scope.Products;
-                    $scope.ProductMakes = _.orderBy(_.uniqBy($scope.Products, 'Marca'), ['Marca'], ['asc']);
-                    $scope.ProductStates = _.orderBy(_.uniqBy($scope.Products, 'State'), ['State'], ['asc']);
-                    $scope.ProductModels = _.orderBy(_.uniqBy($scope.Products, 'Modelo'), ['Modelo'], ['asc']);
+                    $scope.ProductMakes = _.orderBy(_.uniqBy($scope.Products, 'Marca'), ['Marca'], ['asc']).filter(function (el) { return el.Marca.trim() != '' });
+                    $scope.ProductStates = _.orderBy(_.uniqBy($scope.Products, 'State'), ['State'], ['asc']).filter(function (el) { return el.State.trim() != '' });
+                    $scope.ProductModels = _.orderBy(_.uniqBy($scope.Products, 'Modelo'), ['Modelo'], ['asc']).filter(function (el) { return el.Modelo.trim() != '' });
                     $scope.FilterProduct();
                     $loading.finish('myloading');
                 }, function errorCallback(response) {
