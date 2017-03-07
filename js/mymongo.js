@@ -17,9 +17,9 @@ module.exports = {
                     else {
                         return callback('Ok');
                     }
+                    db.close();
                 });
             }
-            db.close();
         });
     },
     Find: function Find(pcollection, filter, fields, callback)
@@ -44,9 +44,9 @@ module.exports = {
                         callback([]);
                         console.log('No document(s) found with defined "find" criteria!');
                     }
+                    db.close();
                 });
             }
-            db.close();
         });
     },
     Insert: function Insert(pcollection, dataInsert, callback) {
@@ -66,9 +66,9 @@ module.exports = {
                     else {
                         callback('Ok');
                     }
+                    db.close();
                 });
             }
-            db.close();
         });
     },
     Remove: function Remove(pcollection, criteria, callback) {
@@ -88,9 +88,9 @@ module.exports = {
                     else {
                         callback('Ok');
                     }
+                    db.close();
                 });
             }
-            db.close();
         });
     },
     Aggregate: function Aggregate(pcollection, aggregatequery, callback) {
@@ -114,9 +114,9 @@ module.exports = {
                         callback([]);
                         console.log('No document(s) found with defined "find" criteria!');
                     }
+                    db.close();
                 });
             }
-            db.close();
         });
     }
 }
