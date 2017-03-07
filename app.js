@@ -217,23 +217,33 @@ app.post('/upload', function (req, res) {
 
 app.post('/Registration', function (req, res) {
 
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var Data = {};
 
-    for (var i = 0; i < 5; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
+    MyMongo.Find('Users', { 'Email': req.body.Email }, {}, function (result) {
+        if (result.length > 0) {
+            Data.Result = 'Re';
+            res.end(JSON.stringify(Data));
+            return 0;
+        }
+        else {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    MyMongo.Insert('Users', { 'Enterprise': req.body.Enterprise, 'State': req.body.State, 'Phone': req.body.Phone, 'Email': req.body.Email, 'Password': text }, function (result) {
-        if (result == 'Ok') {
-            MyMail.SendEmail("<p>&nbsp;</p><p>Hola!</p><p>Solicitaste una clave de acceso a Encu&eacute;ntralo. Hemos generado una al azar, la cual es: <strong>" + text + "</strong>.</p><p>Las mejores ventas!</p><p>&nbsp;</p>", req.body.Email, "Acceso a Encuentralo.");
-            var Data = {};
-            Data.Result = 'Ok';
-            res.end(JSON.stringify(Data))
-        };
+            for (var i = 0; i < 5; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            MyMongo.Insert('Users', { 'Enterprise': req.body.Enterprise, 'State': req.body.State, 'Phone': req.body.Phone, 'Email': req.body.Email, 'Password': text }, function (result) {
+                if (result == 'Ok') {
+                    MyMail.SendEmail("<p>&nbsp;</p><p>Hola!</p><p>Solicitaste una clave de acceso a Encu&eacute;ntralo. Hemos generado una al azar, la cual es: <strong>" + text + "</strong>.</p><p>Las mejores ventas!</p><p>&nbsp;</p>", req.body.Email, "Acceso a Encuentralo.");
+                    Data.Result = 'Ok';
+                    res.end(JSON.stringify(Data))
+                    return 0;
+                };
+            }
+            );
+        }
     }
     );
-
 });
 
 app.post('/RecoverPassword', function (req, res) {

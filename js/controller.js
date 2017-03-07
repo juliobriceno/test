@@ -6,7 +6,7 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
 
         .controller('ctrlUploadFile', ['$scope', '$http', 'FileUploader', '$loading', function ($scope, $http, FileUploader, $loading) {
             $scope.regPasswordRepeat = '';
-            $scope.States = [{ name: 'Amazonas' }, { name: 'Anzo\341tegui' }, { name: 'Apure' }, { name: 'Aragua' }, { name: 'Barinas' }, { name: 'Bol\355var' }, { name: 'Carabobo' }, { name: 'Cojedes' }, { name: 'Delta Amacuro' }, { name: 'Distrito Capital' }, { name: 'Falc\363n' }, { name: 'Gu\341rico' }, { name: 'Lara' }, { name: 'M\351rida' }, { name: 'Miranda' }, { name: 'Monagas' }, { name: 'Nueva Esparta' }, { name: 'Portuguesa' }, { name: 'Sucre' }, { name: 'T\341chira' }, { name: 'Trujillo' }, { name: 'Vargas' }, { name: 'Yaracuy' }, { name: 'Zulia' }];
+            $scope.States = [{ name: 'Bocas del Toro' }, { name: 'Cocl\u00e9' }, { name: 'Col\u00f3n' }, { name: 'Chiriqu\u00ed' }, { name: 'Dari\u00e9n' }, { name: 'Herrera' }, { name: 'Los Santos' }, { name: 'Panam\u00e1' }, { name: 'Panam\u00e1 Oeste' }, { name: 'Veraguas' }];
             $scope.uploader = new FileUploader();
             $scope.uploader.url = "/upload";
             $scope.uploader.onBeforeUploadItem = function (item) {
@@ -340,7 +340,7 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     alert(response.statusText);
                 });
             }
-            $scope.States = [{ name: 'Amazonas' }, { name: 'Anzo\341tegui' }, { name: 'Apure' }, { name: 'Aragua' }, { name: 'Barinas' }, { name: 'Bol\355var' }, { name: 'Carabobo' }, { name: 'Cojedes' }, { name: 'Delta Amacuro' }, { name: 'Distrito Capital' }, { name: 'Falc\363n' }, { name: 'Gu\341rico' }, { name: 'Lara' }, { name: 'M\351rida' }, { name: 'Miranda' }, { name: 'Monagas' }, { name: 'Nueva Esparta' }, { name: 'Portuguesa' }, { name: 'Sucre' }, { name: 'T\341chira' }, { name: 'Trujillo' }, { name: 'Vargas' }, { name: 'Yaracuy' }, { name: 'Zulia' }];
+            $scope.States = [{ name: 'Bocas del Toro' }, { name: 'Cocl\u00e9' }, { name: 'Col\u00f3n' }, { name: 'Chiriqu\u00ed' }, { name: 'Dari\u00e9n' }, { name: 'Herrera' }, { name: 'Los Santos' }, { name: 'Panam\u00e1' }, { name: 'Panam\u00e1 Oeste' }, { name: 'Veraguas' }];
             $scope.Registration = function () {
                 if ($scope.ValidateEmail($scope.regEmail) == false) {
                     swal("Mensaje", "Coloca un correo v\u00e1lido.");
@@ -369,6 +369,9 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     $loading.finish('myloading');
                     if (response.data.Result == 'Ok') {
                         swal("Mensaje", "Tu cuenta fue creada. Te hemos enviado un correo con datos de acceso.");
+                    }
+                    else if (response.data.Result == 'Re') {
+                        swal("Mensaje", "Lo siento, ya existe otro registro con esa cuenta de correo. Intenta con otro.");
                     }
                     else {
                         swal("Mensaje de la aplicacion de recibos", "Ocurri\u00f3 un error inesperado.");
