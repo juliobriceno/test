@@ -96,7 +96,20 @@
             background-repeat: no-repeat;
         }
                
+        .pull-right {
+    float: right !important;
+    padding: 0px 100px;
+}
 
+  .claseroja {
+            color: red;
+        }
+        .claseamarilla {
+            color: #FFBF00;
+        }
+        .claseverde {
+            color: green;
+        }
 </style>
 </head>
 <body ng-cloak>
@@ -176,72 +189,49 @@
              <div class="">
                 <div class="panel panel-default">  
                  <div class="panel-body">
-
-
-                 <div class="table-responsive">
+                    <div class="table-responsive">
                      <table class="table table-striped" style="border:none;">
-
                          <tr ng-repeat="Product in Products">
-                             <td class="col-sm-6 col-md-6">
+                             <td class="col-md-7">
                                  <div class="media">
-                                     <div class="media-body">
-                                         <h4 class="media-heading"><a href="#">{{Product.Descripcion}}</a></h4>
-                                         <h6> Marca: {{Product.Marca}}</h6>
-                                         <h6> Modelo: {{Product.Modelo}}</h6>
-                                         <h6> Serial: {{Product.Serial}}</h6>
-                                         <h6> Estado: {{Product.Estado}}</h6>
+                                     <div class="media-body ">
+                                        <h4 class="media-heading">
+                                        <a href="#" >{{Product.Descripcion}}</a></h4>
+                                         <div class="pull-left">
+
+                                             <h6  class="" > Modelo:{{Product.Modelo}}</h6>
+                                             <h6 > Serial:{{Product.Serial}}</h6>
+                                         </div>
+                                         <div class="pull-right" style="margin-left: 5px;">
+                                            <h6  class=""> Estado:{{Product.Estado}}</h6>
+                                            <h6 class=""> Marca:{{Product.Marca}}</h6>
+                                          </div>
                                      </div>
+
+
                                  </div>
                              </td>
-                             <td class="col-sm-3 col-md-1 text-center">
+                             <td class="col-md-1 text-center">
                                  <strong>Precio</strong>
-                                 <h6>{{Product.Precio | currency}}</h6>
+                                 <span class="badge"><h6>{{Product.Precio | currency}}</h6></span>
                                  <strong>Cantidad</strong>
-                                 <h6>{{Product.Cantidad | number}}</h6>
+                                 <b><h6 ng-class="{claseroja: Product.Cantidad < 10, claseamarilla: Product.Cantidad > 9 && Product.Cantidad < 100, claseverde: Product.Cantidad > 99 }"> {{Product.Cantidad | number}}</h6></b>
                              </td>
-                             <td class="col-sm-3 col-md-1">
+                             <td class="col-sm-3 col-md-4">
                                  <h4 class="media-heading"><a href="#">{{Product.Enterprise}}</a></h4>
-                                 <h6>{{Product.State}}</h6>
+                                 <h6>{{Product.State}}</h6><span class"glyphicon glyphicon-map-marker"></span>
                                  <h6></h6>
-                                 <a ng-href="{{'mailto:' + Product.Email}}">{{Product.Email}} </a>
+                                 <span class=" glyphicon glyphicon-envelope"></span><a ng-href="{{'mailto:' + Product.Email}}"> {{Product.Email}} </a>
                                  <h6>{{Product.Phone}}</h6>
                              </td>
                          </tr>
-
-
-                         <!--<thead style="background-color:#ecf0f1; ">
-                             <tr>
-                                 <th>Descripción</th>
-                                 <th>Precio</th>
-                                 <th>Cantidad</th>
-                                 <th>Serial</th>
-                                 <th>Estado</th>
-                                 <th>Marca</th>
-                                 <th>Modelo</th>
-                                 <th>Comercio</th>
-                                 <th>Ubicación</th>
-                                 <th>Teléfono</th>
-                                 <th>Correo</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             <tr ng-repeat="Product in Products">
-                                 <td>{{Product.Descripcion}}</td>
-                                 <td>{{Product.Precio}}</td>
-                                 <td>{{Product.Cantidad}}</td>
-                                 <td>{{Product.Serial}}</td>
-                                 <td>{{Product.Estado}}</td>
-                                 <td>{{Product.Marca}}</td>
-                                 <td>{{Product.Modelo}}</td>
-                                 <td>{{Product.Enterprise}}</td>
-                                 <td>{{Product.State}}</td>
-                                 <td>{{Product.Phone}}</td>
-                                 <td>{{Product.Email}}</td>
-                             </tr>
-                         </tbody>-->
                      </table>
                  </div>
-                </div> 
+             </div>
+             </div>
+
+                 
+               
                 </div>
              </div>
              </div>
