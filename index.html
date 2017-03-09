@@ -176,9 +176,40 @@
              <div class="">
                 <div class="panel panel-default">  
                  <div class="panel-body">
+
+
                  <div class="table-responsive">
                      <table class="table table-striped" style="border:none;">
-                         <thead style="background-color:#ecf0f1; ">
+
+                         <tr ng-repeat="Product in Products">
+                             <td class="col-sm-6 col-md-6">
+                                 <div class="media">
+                                     <div class="media-body">
+                                         <h4 class="media-heading"><a href="#">{{Product.Descripcion}}</a></h4>
+                                         <h6> Marca: {{Product.Marca}}</h6>
+                                         <h6> Modelo: {{Product.Modelo}}</h6>
+                                         <h6> Serial: {{Product.Serial}}</h6>
+                                         <h6> Estado: {{Product.Estado}}</h6>
+                                     </div>
+                                 </div>
+                             </td>
+                             <td class="col-sm-3 col-md-1 text-center">
+                                 <strong>Precio</strong>
+                                 <h6>{{Product.Precio | currency}}</h6>
+                                 <strong>Cantidad</strong>
+                                 <h6>{{Product.Cantidad | number}}</h6>
+                             </td>
+                             <td class="col-sm-3 col-md-1">
+                                 <h4 class="media-heading"><a href="#">{{Product.Enterprise}}</a></h4>
+                                 <h6>{{Product.State}}</h6>
+                                 <h6></h6>
+                                 <a ng-href="{{'mailto:' + Product.Email}}">{{Product.Email}} </a>
+                                 <h6>{{Product.Phone}}</h6>
+                             </td>
+                         </tr>
+
+
+                         <!--<thead style="background-color:#ecf0f1; ">
                              <tr>
                                  <th>Descripción</th>
                                  <th>Precio</th>
@@ -207,7 +238,7 @@
                                  <td>{{Product.Phone}}</td>
                                  <td>{{Product.Email}}</td>
                              </tr>
-                         </tbody>
+                         </tbody>-->
                      </table>
                  </div>
                 </div> 
