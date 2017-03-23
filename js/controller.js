@@ -6,8 +6,8 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
 
         .controller('ctrlUploadFile', ['$scope', '$http', 'FileUploader', '$loading', function ($scope, $http, FileUploader, $loading) {
             $scope.regPasswordRepeat = '';
-            //$scope.States = [{ name: 'Bocas del Toro' }, { name: 'Cocl\u00e9' }, { name: 'Col\u00f3n' }, { name: 'Chiriqu\u00ed' }, { name: 'Dari\u00e9n' }, { name: 'Herrera' }, { name: 'Los Santos' }, { name: 'Panam\u00e1' }, { name: 'Panam\u00e1 Oeste' }, { name: 'Veraguas' }];
-            $scope.States = [{ name: 'Barcelona' }, { name: 'Madrid' }];
+            $scope.States = [{ name: 'Bocas del Toro' }, { name: 'Cocl\u00e9' }, { name: 'Col\u00f3n' }, { name: 'Chiriqu\u00ed' }, { name: 'Dari\u00e9n' }, { name: 'Herrera' }, { name: 'Los Santos' }, { name: 'Panam\u00e1' }, { name: 'Panam\u00e1 Oeste' }, { name: 'Veraguas' }];
+            //$scope.States = [{ name: 'Barcelona' }, { name: 'Madrid' }];
             $scope.uploader = new FileUploader();
             $scope.uploader.url = "/upload";
             $scope.uploader.onBeforeUploadItem = function (item) {
@@ -341,7 +341,8 @@ angular.module('Solicitudes', ['angularFileUpload', 'darthwade.loading', 'ngTags
                     alert(response.statusText);
                 });
             }
-            $scope.States = [{ name: 'Barcelona' }, { name: 'Madrid' }];
+            //$scope.States = [{ name: 'Barcelona' }, { name: 'Madrid' }];
+            $scope.States = [{ name: 'Bocas del Toro' }, { name: 'Cocl\u00e9' }, { name: 'Col\u00f3n' }, { name: 'Chiriqu\u00ed' }, { name: 'Dari\u00e9n' }, { name: 'Herrera' }, { name: 'Los Santos' }, { name: 'Panam\u00e1' }, { name: 'Panam\u00e1 Oeste' }, { name: 'Veraguas' }];
             $scope.Registration = function () {
                 if ($scope.ValidateEmail($scope.regEmail) == false) {
                     swal("Encu\u00e9ntralo dice", "Coloca un correo v\u00e1lido.");
